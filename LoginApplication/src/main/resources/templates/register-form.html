@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Registration</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">User Registration</h1>
+    <div class="alert alert-primary my-3" th:if="${message}">
+        <p class="text-center" th:text="${message}"></p>
+    </div>
+    <form th:object="${user}" method="post" th:action="@{/create-user}" class="needs-validation mt-4" >
+        <div class="form-group">
+            <label for="name">Username:</label>
+            <input type="text" id="name" name="name" class="form-control" th:field="*{name}" required>
+            <div class="invalid-feedback">Please enter a name.</div>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" class="form-control" th:field="*{email}" required>
+            <div class="invalid-feedback">Please enter an email.</div>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" class="form-control" th:field="*{password}" required>
+            <div class="invalid-feedback">Please enter a password.</div>
+        </div>
+        <div class="form-group">
+            <label for="password"> Conform Password:</label>
+            <input type="password" id="cPassword" name="cPassword" class="form-control" required>
+            <div class="invalid-feedback">Please reenter  password.</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create User</button>
+        <a class="btn btn-primary" href="login">login</a>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
