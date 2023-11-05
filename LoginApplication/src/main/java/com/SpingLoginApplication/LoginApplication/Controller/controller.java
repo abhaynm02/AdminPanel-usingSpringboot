@@ -74,32 +74,29 @@ public class controller {
         redirectAttributes.addFlashAttribute("message", "Conform you password");
         return "redirect:register";
     }
-    @GetMapping("login")
-    public String login(Principal principal, HttpSession session){
-        if (principal!=null){
-            UserEntity user =userServiceI.findByEmail(principal.getName());
-            session.setAttribute("user",user);
-            return "redirect:admin";
-        }
+    @GetMapping("/login")
+    public String login(){
 
         return "login";
     }
     @GetMapping("admin")
-    public String adminPage(Model model ,HttpSession session){
-      UserEntity user=(UserEntity) session.getAttribute("user");
+    public String adminPage(Model model ,HttpSession session,Principal principal){
+        UserEntity user =userServiceI.findByEmail(principal.getName());
+           session.setAttribute("user",user);
    if (user!=null){
        model.addAttribute( "name",user.getName());
        return "admin";
    }
    return "redirect:login";
     }
-    @GetMapping("home")
-    public String userPage( HttpSession httpSession, Model model){
-        UserEntity user=(UserEntity) httpSession.getAttribute("user");
+    @GetMapping("/home")
+    public String userPage( HttpSession session, Model model,Principal principal){
+        UserEntity user =userServiceI.findByEmail(principal.getName());
+          session.setAttribute("user",user);
 
          if (user!= null){
              model.addAttribute("name",user.getName());
-             return "admin";
+             return "home";
          }
         return "redirect:login";
     }

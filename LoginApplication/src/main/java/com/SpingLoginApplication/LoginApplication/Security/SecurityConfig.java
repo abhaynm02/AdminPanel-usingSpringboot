@@ -31,7 +31,7 @@ public class SecurityConfig {
                 
                 .authorizeRequests()
                 .antMatchers("/register","/create-user","/login").permitAll()
-                .antMatchers("/admin","/listOfUsers","/deleteUser","admin-register").hasAnyAuthority("ADMIN")
+                .antMatchers("/admin","/listOfUsers","/deleteUser","/admin-register").hasAnyAuthority("ADMIN")
                 .antMatchers("/home").hasAnyAuthority("USER")
                 .anyRequest().authenticated()
                 .and()
